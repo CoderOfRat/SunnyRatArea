@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '慵 懒 笔 记',
+  title: '慵懒笔记',
   tagline: '岁月风霜三十载，百味人生唯己知；忆往昔，年少轻狂时，俱远矣；看今日，而立之年始，继拼之！',
   favicon: 'img/favicon.png',
 
