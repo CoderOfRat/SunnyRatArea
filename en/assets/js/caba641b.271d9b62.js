@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9900],{5590:e=>{e.exports=JSON.parse('{"label":"facebook","permalink":"/SunnyRatArea/en/blog/tags/facebook","allTagsPath":"/SunnyRatArea/en/blog/tags","count":1}')}}]);

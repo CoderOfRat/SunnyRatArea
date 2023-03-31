@@ -4,20 +4,19 @@
         <title>慵懒笔记 Blog</title>
         <link>https://coderofrat.github.io/SunnyRatArea/en/blog</link>
         <description>慵懒笔记 Blog</description>
-        <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 31 Mar 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Welcome]]></title>
+            <title><![CDATA[谈心会友]]></title>
             <link>https://coderofrat.github.io/SunnyRatArea/en/blog/welcome</link>
             <guid>https://coderofrat.github.io/SunnyRatArea/en/blog/welcome</guid>
-            <pubDate>Thu, 26 Aug 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Docusaurus blogging features are powered by the blog plugin.]]></description>
-            <content:encoded><![CDATA[<p><a href="https://docusaurus.io/docs/blog" target="_blank" rel="noopener noreferrer">Docusaurus blogging features</a> are powered by the <a href="https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog" target="_blank" rel="noopener noreferrer">blog plugin</a>.</p><p>Simply add Markdown files (or folders) to the <code>blog</code> directory.</p><p>Regular blog authors can be added to <code>authors.yml</code>.</p><p>The blog post date can be extracted from filenames, such as:</p><ul><li><code>2019-05-30-welcome.md</code></li><li><code>2019-05-30-welcome/index.md</code></li></ul><p>A blog post folder can be convenient to co-locate blog post images:</p><p><img loading="lazy" alt="Docusaurus Plushie" src="/SunnyRatArea/en/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p><p>The blog supports tags as well!</p><p><strong>And if you don't want a blog</strong>: just delete this directory, and use <code>blog: false</code> in your Docusaurus config.</p>]]></content:encoded>
-            <category>facebook</category>
-            <category>hello</category>
-            <category>docusaurus</category>
+            <pubDate>Fri, 31 Mar 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[本站由 Docusaurus 生成，主要用途是用来记录所学、所想以及生活记录。]]></description>
+            <content:encoded><![CDATA[<blockquote><p>本站由 Docusaurus 生成，主要用途是用来记录所学、所想以及生活记录。</p></blockquote><h3 class="anchor anchorWithStickyNavbar_LWe7" id="1本站以专题记录为主">1.本站以专题记录为主<a href="#1本站以专题记录为主" class="hash-link" aria-label="Direct link to 1.本站以专题记录为主" title="Direct link to 1.本站以专题记录为主">​</a></h3><p>目前专题包括 <code>Vue砖头们</code>、<code>React砖头们</code>、<code>房子怎么搭建</code>、<code>电怎么入户</code>、<code>网怎么入户</code>、<code>装修师</code>。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="2本站半开源重在交流">2.本站半开源，重在交流<a href="#2本站半开源重在交流" class="hash-link" aria-label="Direct link to 2.本站半开源，重在交流" title="Direct link to 2.本站半开源，重在交流">​</a></h3><p>希望通过本站，你可以有不一样的收获，也欢迎有心意的博客交流，可以通过 issue 交换网址及头像信息。有好的文章，也欢迎投稿，最好是链接形式+标题+简介<!-- -->[我不想成果变成本站的，重在分享]<!-- -->。本站文章，如有不当，也欢迎指出。</p><h3 class="anchor anchorWithStickyNavbar_LWe7" id="3友情链接">3.友情链接<a href="#3友情链接" class="hash-link" aria-label="Direct link to 3.友情链接" title="Direct link to 3.友情链接">​</a></h3><div><a href="https://coderofrat.github.io/SunnyRatArea/" target="_blank" rel="noopener noreferrer" style="width:100%;height:60px;display:flex;align-items:center;background-color:rgba(0,25,0,.1)"><div style="width:58px;height:58px;background:url(https://github.com/CoderOfRat.png) no-repeat center center / 100% 100%;border:1px solid rgba(255,255,255,.3);border-radius:4px;overflow:hidden;margin:0 4px 0 1px"></div><div style="height:58px;flex:1;overflow:hidden"><div style="display:flex;flex-direction:column;justify-content:space-around"><span>CoderOfRat Wenhao Guo.Welecome to my site!</span><span>前端开发，一个乐于交流的人。</span></div></div></a></div>]]></content:encoded>
+            <category>简介</category>
+            <category>交流</category>
         </item>
         <item>
             <title><![CDATA[MDX Blog Post]]></title>
