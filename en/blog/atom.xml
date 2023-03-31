@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://coderofrat.github.io/SunnyRatArea/en/blog</id>
-    <title>慵 懒 笔 记 Blog</title>
+    <title>慵懒笔记 Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://coderofrat.github.io/SunnyRatArea/en/blog"/>
-    <subtitle>慵 懒 笔 记 Blog</subtitle>
+    <subtitle>慵懒笔记 Blog</subtitle>
     <icon>https://coderofrat.github.io/SunnyRatArea/en/img/favicon.png</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
