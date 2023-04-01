@@ -88,6 +88,12 @@ const config = {
             position: 'left',
             label: 'React砖头们',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'basicProSidebar',
+            position: 'left',
+            label: '房子怎么建',
+          },
           {to: '/blog', label: '搬砖侠的日常', position: 'left'},
           {
             href: 'https://github.com/CoderOfRat',
