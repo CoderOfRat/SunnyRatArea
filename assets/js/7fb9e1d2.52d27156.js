@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6566],{8454:e=>{e.exports=JSON.parse('{"label":"\u8d44\u6e90","permalink":"/SunnyRatArea/docs/tags/\u8d44\u6e90","allTagsPath":"/SunnyRatArea/docs/tags","count":1,"items":[{"id":"sources/index","title":"\u8d44\u6e90\u5206\u4eab","description":"*","permalink":"/SunnyRatArea/docs/sources/"}]}')}}]);
