@@ -42,14 +42,14 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/CoderOfRat/SunnyRatArea/tree/main/docs",
+          editUrl: "https://github.com/CoderOfRat/SunnyRatArea/tree/gh-pages/docs/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+            "https://github.com/CoderOfRat/SunnyRatArea/tree/gh-pages/blog/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
