@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[1124],{6988:e=>{e.exports=JSON.parse('{"label":"react","permalink":"/SunnyRatArea/docs/tags/react","allTagsPath":"/SunnyRatArea/docs/tags","count":1,"items":[{"id":"react/index","title":"React\u4e13\u9898","description":"\u5efa\u8bbe\u4e2d~","permalink":"/SunnyRatArea/docs/react/"}]}')}}]);

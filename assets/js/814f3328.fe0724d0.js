@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u8c08\u5fc3\u4f1a\u53cb","permalink":"/SunnyRatArea/blog/intro"},{"title":"Docusaurus \u7f51\u7ad9\u90e8\u7f72\u65b9\u6848","permalink":"/SunnyRatArea/blog/how-to-build-website-yourself"}]}')}}]);
