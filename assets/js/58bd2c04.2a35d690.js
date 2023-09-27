@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[6558],{8468:e=>{e.exports=JSON.parse('{"label":"NodeJS","permalink":"/docs/tags/node-js","allTagsPath":"/docs/tags","count":1,"items":[{"id":"nodejs-lifecycle/index","title":"NodeJS\u4e13\u9898","description":"\u5efa\u8bbe\u4e2d~","permalink":"/docs/nodejs-lifecycle/"}]}')}}]);

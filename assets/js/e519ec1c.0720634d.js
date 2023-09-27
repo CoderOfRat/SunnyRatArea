@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[649],{6954:e=>{e.exports=JSON.parse('{"label":"linux","permalink":"/SunnyRatArea/docs/tags/linux","allTagsPath":"/SunnyRatArea/docs/tags","count":1,"items":[{"id":"linux/index","title":"Linux\u4e13\u9898","description":"\u5efa\u8bbe\u4e2d~","permalink":"/SunnyRatArea/docs/linux/"}]}')}}]);
