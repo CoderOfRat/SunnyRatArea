@@ -1,9 +1,8 @@
 ---
-title: 阅读指南
-sidebar_position: 1
+title: Vue浅尝指南
+authors: [CoderOfRat]
+tags: [vue,Vue,,vue2]
 ---
-
-作者： 郭文浩
 
 ## Vue: 渐进式JavaScript框架
 

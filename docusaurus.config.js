@@ -190,6 +190,11 @@ const config = {
           autoCollapseCategories: true, // 自动收起其他分类文档
         },
       },
+      algolia: {
+        appId: 'CYF353MA4J',
+        apiKey: 'c3c46da4423ae30e708132818a43660a',
+        indexName: "sunnyratarea",
+      },
     }),
 };
 
