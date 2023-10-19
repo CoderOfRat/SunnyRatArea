@@ -1,7 +1,7 @@
 ---
 title: Vue浅尝指南
 authors: [CoderOfRat]
-tags: [vue,Vue,,vue2]
+tags: [vue,Vue,vue2]
 ---
 
 ## Vue: 渐进式JavaScript框架
