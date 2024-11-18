@@ -1,30 +1,26 @@
-import React,{useState,useEffect} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import TypedTextComp from './typedtext'
+import Heading from '@theme/Heading';
+
 import styles from './index.module.css';
-import axios from 'axios'
+
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
-  const [bgUrl,setBgUrl] = useState("");
-  useEffect(()=> {
-    axios.get("https://api.no0a.cn/api/bing/0").then(res => {
-      setBgUrl(res.data.bing.url)
-    })
-  },[]);
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)} style={{backgroundImage:`url(${bgUrl})`}}>
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle"><TypedTextComp/></p>
+        <Heading as="h1" className="hero__title">
+          {siteConfig.title}
+        </Heading>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/blog/intro">
-            认识一下 - 2min ⏱️
+            to="/docs/intro">
+            Docusaurus Tutorial - 5min ⏱️
           </Link>
         </div>
       </div>
