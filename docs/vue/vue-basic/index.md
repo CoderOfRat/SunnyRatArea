@@ -85,7 +85,7 @@ vue的编译过程：先显示插值表达式，再渲染
 
 > 类似 
 >
-> 1.原生js的 dom.innerText = \`${data.msg}\` 
+> 1.原生js的 dom.innerText = \`$\{data.msg\}\` 
 
 ```html
 <!-- 插值表达式的方式 如果需要解决闪动问题 就需要 v-cloak 指令 配合属性选择器设置隐藏元素的样式 -->
@@ -106,7 +106,7 @@ vue的编译过程：先显示插值表达式，再渲染
 </div>
 ```
 
-`v-pre`不渲染当前元素 {{msg}}直接原文输出
+`v-pre`不渲染当前元素 \{\{msg\}\}直接原文输出
 
 注意 setInterval会影响v-pre的渲染，只有首次正确
 
@@ -2176,7 +2176,7 @@ module.exports = { presets }
 
 #### 1. 默认导出 与 默认导入
 
-- 默认导出语法 export default {默认导出的成员}
+- 默认导出语法 export default \{默认导出的成员\}
 - 默认导入语法 import 接收名 from './m1.js'
 
 在一个模块中 export default 最多只能使用一次
