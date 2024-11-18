@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[5479],{8159:e=>{e.exports=JSON.parse('{"permalink":"/SunnyRatArea/en/blog/tags/\u6b63\u5219\u8868\u8fbe\u5f0f","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

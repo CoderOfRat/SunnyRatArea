@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2030],{8499:e=>{e.exports=JSON.parse('{"label":"\u8bfb\u4e66","permalink":"/SunnyRatArea/en/blog/tags/\u8bfb\u4e66","allTagsPath":"/SunnyRatArea/en/blog/tags","count":1}')}}]);
