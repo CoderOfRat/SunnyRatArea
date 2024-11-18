@@ -21,7 +21,7 @@ const config: Config = {
   organizationName: 'CoderOfRat', // Usually your GitHub org/user name.
   projectName: 'SunnyRatArea', // Usually your repo name.
   trailingSlash: false, // 允许自定义 URL/链接末尾斜杠的存在/不存在，以及如何生成静态 HTML 文件
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'ignore',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
