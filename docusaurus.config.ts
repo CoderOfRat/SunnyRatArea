@@ -3,9 +3,10 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+console.log(process.env.NODE_ENV);
 
 const config: Config = {
-  title: "学 鼠 偷 粮",
+  title: "The Web3 Chat Area",
   tagline:
     "岁月风霜三十载，百味人生唯己知；忆往昔，年少轻狂时，俱远矣；看今日，而立之年始，继拼之！",
   favicon: "img/favicon.png",
@@ -28,8 +29,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "zh-Hans",
-    locales: ["zh-Hans", "en"],
+    defaultLocale: 'zh-CN',
+    locales: ['zh-CN'],
   },
 
   presets: [
@@ -130,6 +131,14 @@ const config: Config = {
         },
         { to: "/blog", label: "日复一文", position: "left" },
         {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        {
           href: "https://github.com/CoderOfRat",
           // label: "GitHub",
           html: `<div style="display:flex;justify-content: center;align-items: flex-end;"><svg height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
@@ -157,6 +166,15 @@ const config: Config = {
       appId: 'CYF353MA4J',
       apiKey: 'c3c46da4423ae30e708132818a43660a',
       indexName: "sunnyratarea",
+    },
+    // 顶部通知栏
+    announcementBar: {
+      id: 'support_us',
+      content:
+        'We are looking to revamp our docs, please fill <a target="_blank" rel="noopener noreferrer" href="#">this survey</a>',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: true,
     },
   } satisfies Preset.ThemeConfig,
 };

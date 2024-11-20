@@ -1,6 +1,5 @@
 ---
 title: 谈心会友
-position: 1
 authors: [CoderOfRat]
 hide_table_of_contents: true
 tags: [简介]
