@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import typewriter from "typewriter-lite";
 declare type typedtext = {
@@ -15,7 +14,6 @@ const TypedTextComp = (props) => {
   const { title, tagline } = siteConfig;
   const typeRef = useRef(null);
   const text = [...tagline.split("；")];
-
   useEffect(() => {
     typewriter({
       element: typeRef.current,

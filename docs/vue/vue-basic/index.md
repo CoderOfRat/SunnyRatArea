@@ -1,9 +1,8 @@
 ---
-title: 阅读指南
-sidebar_position: 1
+title: Vue浅尝指南
+authors: [CoderOfRat]
+tags: [vue,Vue,vue2]
 ---
-
-作者： 郭文浩
 
 ## Vue: 渐进式JavaScript框架
 
@@ -163,7 +162,7 @@ vue的编译过程：先显示插值表达式，再渲染
 
 ③ VM(View-Model)
 
-Model： 数据源 data:{ msg: "vue data"}
+Model： 数据源 data:\{ msg: "vue data"\}
 
 View：页面视图  页面内容，无论是页面自有的还是渲染的
 
@@ -2185,7 +2184,7 @@ module.exports = { presets }
 #### 2.按需导出 与 按需导入
 
 - 按需导出语法：export let s1 = 'aaa'
-- 按需导入语法：import { s1,s2 as ss2 } from './m1.js'
+- 按需导入语法：import \{ s1,s2 as ss2 \} from './m1.js'
 
 在每个模块中，可以使用多次按需导出
 
@@ -3118,13 +3117,13 @@ this.$refs.loginFormRef.resetFields();
 1. 给登录按钮注册 @click="login" 事件
 
 2. 添加登陆事件处理函数
-
+```js
    this.$refs.loginFormRef.validate(valid =>{
 
    ​      console.log(valid)
 
     })
-
+```
    如果校验通过，valid值为true,不通过，则返回值为false
 
 ##### 点击登录，发送请求
