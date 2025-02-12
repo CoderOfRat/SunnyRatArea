@@ -48,6 +48,8 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
+          postsPerPage: 'ALL',
+          blogSidebarCount: 'ALL',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: "https://github.com/CoderOfRat/SunnyRatArea/tree/main/",
