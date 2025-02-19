@@ -102,9 +102,9 @@ const config: Config = {
         },
         {
           type: "docSidebar",
-          sidebarId: "linuxSidebar",
+          sidebarId: "golangSiderbar",
           position: "left",
-          label: "Linux",
+          label: "Golang",
         },
         {
           type: "docSidebar",

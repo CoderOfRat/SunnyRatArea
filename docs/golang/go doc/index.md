@@ -77,7 +77,7 @@ func main() {
 
 ``` bash
 # GOPROXY=https://proxy.golang.org,direct
-GOPROXY=https://goproxy.cn,direct
+GOPROXY=https://goproxy.cn,direct ## 使用七牛云代理
 # 如果失效，自行百度
 ```
 
