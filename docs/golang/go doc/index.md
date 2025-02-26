@@ -210,6 +210,47 @@ $env:GOPROXY = "https://goproxy.cn"
 完成上述的编码及配置，并下载完毕后，执行go mod tidy,等待下载/或者关联完成后，执行`go run .`，即可看到打印出有关通信的语录
 
 ### 4. 创建本地Module
+> Go code is grouped into packages, and packages are grouped into modules. 
+您的模块(go.mod)指定运行代码所需的依赖项(first require)，还包括 Go 版本(go 1.24.0)和它所需的其他模块集(second require)。
+
+- 进入工作目录
+
+``` shell
+cd yourworkspaceforgo
+```
+
+- 创建Go 模块代码目录
+
+``` shell
+mkdir greetings
+```
+
+- 使用`go mod init xxx`，初始化模块，类似于`npm init -y xxx`
+
+``` shell
+go mod init example.com/greetings
+# go: creating new go.mod: module example.com/greetings
+```
+
+> `go mod init` 命令创建一个 `go.mod` 文件来跟踪代码的依赖关系，该文件中目前只包含 `模块名` 和 `当前模块支持的go版本号` 的相关声明；
+但是当你添加依赖项时，`go.mod` 文件将列出你的代码所依赖的版本。这可以保持构建的可重复性，并让你直接控制要使用的模块版本。
+
+- 在此目录中创建 `greetings.go` 文件，然后输入如下代码：
+
+``` go
+package greetings
+
+import "fmt"
+
+// Hello returns a greeting for the named person.
+func Hello(name string) string {
+    // Return a greeting that embeds the name in a message.
+    message := fmt.Sprintf("Hi, %v. Welcome!", name)
+    return message
+}
+```
+
+
 
 
 
