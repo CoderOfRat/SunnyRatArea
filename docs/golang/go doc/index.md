@@ -263,7 +263,7 @@ message = fmt.Printf("Hi, %v. Welcome!", name)
 *以上内容，创建了第一个向外暴露函数的module，接下来我们可以在其他模块引入我们创建的module。*
 
 
-### 在go代码中使用其他模块的代码
+#### 4.1 在go代码中使用其他模块的代码
 
 新建模块目录 `hello`，初始化后，引入之前创建的module
 
@@ -357,7 +357,7 @@ go run .
 
 *至此，已经完成了两个可运行模块的编写/运行，接下来我们来给代码添加一些错误处理逻辑*
 
-### 错误处理逻辑
+#### 4.2 错误处理逻辑
 代码的错误处理逻辑，是让go代码保持健壮的基本要素，我们给之前的`greetings`模块添加错误处理的相关代码：
 
 ``` go
@@ -442,3 +442,62 @@ go run .
 
 *完成该小结，我们错略了解了简单的错误处理方式，接下来我们要通过切片（slice）完善上述greetings模块，
 使之可以返回一个随机的greeting字串*
+
+#### 4.3 利用切片（slice），实现随机打印欢迎语
+> 切片类似于数组，不同之处在于其大小会随着您添加和删除项目而动态变化。切片是 Go 中最有用的类型之一。
+
+进一步修改`greetings/greetings.go`中的代码：
+``` go
+package greetings
+
+import (
+	"errors"
+	"fmt"
+
+	"math/rand"
+)
+
+// Hello returns a greeting for the named person.
+func Hello(name string) (string, error) {
+	// 如果names输入为空字符串，则返回空字符串，抛出异常信息(异常信息开头首字母不允许大写)
+	if name == "" {
+		return "", errors.New("empty name provided")
+	}
+	// Return a greeting that embeds the name in a message.
+	message := fmt.Sprintf(getRandomGreetingsFormat(), name)
+
+	return message, nil
+}
+// go中的func 不支持嵌套写法
+func getRandomGreetingsFormat() string {
+    // []string 省略了长度定义，代表是可变长度的切片
+	greetingsArr := []string{
+		"Hello, %v. Welcome!",
+		"你好！ 欢迎你：%v",
+		"Hi, %v. I am glad to see you here!",
+	}
+
+	return greetingsArr[rand.Intn(len(greetingsArr))]
+}
+```
+
+修改`hello.go`，文件中的message赋值行
+
+``` go
+message, error := greetings.Hello("CoderOfrat")
+```
+
+在hello目录，多次执行`go run .`，得到如下结果：
+
+![go run .](../static/images/2025-02-27_173558.png)
+
+由于打印是随机的，所以结果会有所不同。
+
+*完成上述内容，初步了解了切片的用法，以及如何配合`math/rand`模块提供的随机取数方法，完成随机输出的逻辑，
+接下来，将进一步利用切片，完成针对多人打招呼的功能，let go on ~*
+
+#### 4.4 多人打招呼程序
+> 为了开发流程的规范性，一般我们如果稳定提供了某个功能（func）,并且发布被别人使用了，
+那么我们始终在一个func上进行实现和扩展，将给使用者带来灾难性的问题，因此，如果新开发的功能不是渐进式补充的，
+而是新的出入参、核心逻辑等，那就要考虑新建方法了。
+
