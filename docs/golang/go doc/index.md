@@ -250,15 +250,195 @@ func Hello(name string) string {
 }
 ```
 
+> 在Go中，名称以大写字母开头的函数可以被不在同一包中的函数调用。
+在 Go 中，:= 运算符是一种在一行中声明和初始化变量的快捷方式（Go 使用右侧的值来确定变量的类型）。
+从长远来看，您可能会将其写成：
+
+``` go
+var message string
+
+message = fmt.Printf("Hi, %v. Welcome!", name)
+```
+
+*以上内容，创建了第一个向外暴露函数的module，接下来我们可以在其他模块引入我们创建的module。*
 
 
+### 在go代码中使用其他模块的代码
 
+新建模块目录 `hello`，初始化后，引入之前创建的module
 
-... 未完待续 ...
+``` shell
+cd ..
 
-如果使用的包，尚未发布，比如是自己本地的module，则需要修改指定mod为的索引地址为指定目录，以便识别
+mkdir hello
+
+cd hello
+
+go mod init github.com/coderofrat/hello
+```
+新建`hello.go`,键入如下代码：
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"rsc.io/quote/v4"
+
+	"example.com/greetings"
+)
+
+func main() {
+	fmt.Println("Hello world!")
+
+	fmt.Println(quote.Go())
+
+	fmt.Println(greetings.Hello("CoderOfRat"))
+}
+```
+此时执行`go mod tidy`，将会提示找不到`example.com/greetings`模块：
+
+> 由于引入的`example.com/greetings`包尚未发布，因此为了本地适用此模块，我们需要进行路径指定，让依赖模块可以索引到本地模块。
+如果要使用的包，尚未发布，比如是自己本地的module，执行`go mod edit -replaace example.com/greetings=../greetings`,可以告诉go tools针对此module需要重定向索引位置。该命令指定了应将 example.com/greetings 替换为 ../greetings，以便定位依赖项。
 
 ```shell
 go mod edit -replace example.com/greetings=../greetings
 ```
 
+运行该命令后，`hello`目录中的`go.mod`文件应包含一个`replace`指令：
+> 模块路径后面的数字是伪版本号——用来代替语义版本号所生成的数字
+
+``` sh
+module github.com/coderofrat/hello
+
+go 1.24.0
+
+require (
+	example.com/greetings v0.0.0-00010101000000-000000000000
+	rsc.io/quote/v4 v4.0.1
+)
+
+require (
+	golang.org/x/text v0.22.0 // indirect
+	rsc.io/sampler v1.3.0 // indirect
+)
+
+replace example.com/greetings => ../greetings
+```
+
+从 `hello` 目录中的命令提示符中，运行 `go mod tidy` 命令来同步 `example.com/hello` 模块的依赖项，添加代码所需但尚未在模块中跟踪的依赖项。
+
+``` shell
+$ go mod tidy
+go: found example.com/greetings in example.com/greetings v0.0.0-00010101000000-000000000000
+```
+
+执行后，`go.mod` 文件中的内容如下：
+``` sh
+module example.com/hello
+
+go 1.24.0
+
+replace example.com/greetings => ../greetings
+
+require example.com/greetings v0.0.0-00010101000000-000000000000
+```
+
+随后执行`go run .`,输出如下：
+``` shell
+go run .
+# Hello world!
+# Don't communicate by sharing memory, share memory by communicating.
+# Hi, CoderOfRat. Welcome!
+```
+
+![go run .](../static/images/2025-02-27_142024.png)
+
+*至此，已经完成了两个可运行模块的编写/运行，接下来我们来给代码添加一些错误处理逻辑*
+
+### 错误处理逻辑
+代码的错误处理逻辑，是让go代码保持健壮的基本要素，我们给之前的`greetings`模块添加错误处理的相关代码：
+
+``` go
+package greetings
+
+import (
+	"errors"
+	"fmt"
+)
+
+// Hello returns a greeting for the named person.
+func Hello(name string) (string, error) {
+	// 如果names输入为空字符串，则返回空字符串，抛出异常信息(异常信息开头首字母不允许大写)
+	if name == "" {
+		return "", errors.New("empty name provided")
+	}
+	// Return a greeting that embeds the name in a message.
+	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+    // 在成功返回时添加 nil（表示没有错误）作为第二个值。这样，调用者就可以看到函数成功了。
+	return message, nil
+}
+```
+> go 代码是**静态类型编译型**语言，因此错误的程序输入不会编译成功，所以异常处理一般不考虑此方面。
+
+然后我们在使用更新后的`greetings`包的时候，就需要添加对应的异常捕获代码：
+``` go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"rsc.io/quote/v4"
+
+	"example.com/greetings"
+)
+
+func main() {
+	// Set properties of the predefined Logger, including
+	// the log entry prefix and a flag to disable printing
+	// the time, source file, and line number.
+    // 配置日志包以在其日志消息的开头打印命令名称（“greetings:”），不带时间戳或源文件信息。
+	log.SetPrefix("greetings:")
+	log.SetFlags(0)
+
+	fmt.Println("Hello world!")
+
+	fmt.Println(quote.Go())
+
+	// fmt.Println(greetings.Hello("CoderOfRat"))
+	message, error := greetings.Hello("CoderOfRat")
+
+	if error != nil {
+		// 此打印会终止程序向下运行 Fatal is equivalent to [Print] followed by a call to os.Exit(1).
+		log.Fatal(error)
+	}
+
+	// 没有错误，打印message返回信息
+	fmt.Println(message)
+}
+```
+``` shell
+go run .
+# Hello world!
+# Don't communicate by sharing memory, share memory by communicating.
+# Hi, CoderOfRat. Welcome!
+```
+
+接下来，我们将`greetings.Hello()`方法内参数传递空字符串，再次执行：
+``` go
+message, error := greetings.Hello("")
+```
+
+``` shell
+go run .
+# Hello world!
+# Don't communicate by sharing memory, share memory by communicating.
+# greetings:empty name provided
+# exit status 1
+```
+此时执行到此方法时，后续代码对异常情况进行了打印并终止当前程序的处理。
+
+*完成该小结，我们错略了解了简单的错误处理方式，接下来我们要通过切片（slice）完善上述greetings模块，
+使之可以返回一个随机的greeting字串*
