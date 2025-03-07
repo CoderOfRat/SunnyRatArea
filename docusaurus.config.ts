@@ -155,6 +155,10 @@ const config: Config = {
         autoCollapseCategories: true, // 自动收起其他分类文档
       },
     },
+    tableOfContents: {
+      minHeadingLevel: 2, // 目录树显示的最小层级
+      maxHeadingLevel: 5, // 目录树显示的最大层级
+    },
     algolia: {
       appId: 'CYF353MA4J',
       apiKey: 'c3c46da4423ae30e708132818a43660a',

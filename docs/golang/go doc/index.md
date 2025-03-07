@@ -499,5 +499,164 @@ message, error := greetings.Hello("CoderOfrat")
 #### 4.4 多人打招呼程序
 > 为了开发流程的规范性，一般我们如果稳定提供了某个功能（func）,并且发布被别人使用了，
 那么我们始终在一个func上进行实现和扩展，将给使用者带来灾难性的问题，因此，如果新开发的功能不是渐进式补充的，
-而是新的出入参、核心逻辑等，那就要考虑新建方法了。
+而是新的出入参、核心逻辑等，那就要考虑新建方法了(可以复用同包的逻辑)。
+
+:::note[文件]
+greetings.go
+:::
+
+``` go
+package greetings
+
+import (
+	"errors"
+	"fmt"
+	"log"
+
+	"math/rand"
+)
+
+// Hello returns a greeting for the named person.
+func Hello(name string) (string, error) {
+	// 如果names输入为空字符串，则返回空字符串，抛出异常信息(异常信息开头首字母不允许大写)
+	if name == "" {
+		return "", errors.New("empty name provided")
+	}
+	// Return a greeting that embeds the name in a message.
+	message := fmt.Sprintf(getRandomGreetingsFormat(), name)
+
+	return message, nil
+}
+
+func getRandomGreetingsFormat() string {
+	greetingsArr := []string{
+		"Hello, %v. Welcome!",
+		"你好！ 欢迎你：%v",
+		"Hi, %v. I am glad to see you here!",
+	}
+
+	return greetingsArr[rand.Intn(len(greetingsArr))]
+}
+
+func Greetings(names []string) (map[string]string, error) {
+	messages := make(map[string]string, len(names))
+	if len(names) == 0 {
+		return messages, errors.New("none name provide")
+	}
+	// 循环遍历函数收到的名称，检查每个名称是否具有非空值，然后将消息与每个名称关联起来。
+	// 在此 for 循环中，range 返回两个值：循环中当前项的索引和项值的副本
+	// 您不需要索引，因此可以使用 Go 空白标识符（下划线）来忽略它。
+	for _, name := range names {
+		message, err := Hello(name)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		messages[name] = message
+	}
+
+	return messages, nil
+}
+```
+::: note[文件]
+hello.go
+:::
+``` go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"rsc.io/quote/v4"
+
+	"example.com/greetings"
+)
+
+func main() {
+	// Set properties of the predefined Logger, including
+	// the log entry prefix and a flag to disable printing
+	// the time, source file, and line number.
+	log.SetPrefix("greetings:")
+	log.SetFlags(0)
+
+	fmt.Println("Hello world!")
+
+	fmt.Println(quote.Go())
+
+	// fmt.Println(greetings.Hello("CoderOfRat"))
+	message, error := greetings.Hello("CoderOfrat")
+
+	if error != nil {
+		// 此打印会终止程序向下运行 Fatal is equivalent to [Print] followed by a call to os.Exit(1).
+		log.Fatal(error)
+	}
+
+	// 没有错误，打印message返回信息
+	fmt.Println(message)
+
+	messages, err := greetings.Greetings([]string{
+		"Rat",
+		"Alice",
+		"Goli",
+	})
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Println(messages)
+}
+```
+
+上述代码，我们更改了入参和返参，通过切片传入一系列人名，然后，使用`for`关键字，循环使用传入的参数调用之前定义的Hello函数，并将返回结果接收到使用`make`关键字创建的string Map（`map[string]string`）中。最终返回以人名为键、以欢迎语为值的map。在 Go 中，您可以使用以下语法初始化映射：`make(map[key-type]value-type)`。
+
+本主题介绍了用于表示名称/值对的映射。还介绍了通过为模块中的新功能或更改的功能实现新函数来保持向后兼容性的想法。[了解更多go的向后兼容开发模式。](https://golang.google.cn/blog/module-compatibility)
+
+接下来，我们使用内置的 Go 功能为此模块代码创建单元测试。
+
+#### 4.5 添加单元测试
+
+> Go 内置了对单元测试的支持，可以更轻松地进行测试。具体来说，使用命名约定、Go 的 `testing package` 和 `go test` 命令，可以快速编写和执行测试。
+
+- 在greetings目录创建`greetings_test.go`，文件名以 `_test.go` 结尾，告诉了 `go test` 命令该文件包含测试函数。
+
+在greetings_test.go文件中输入以下代码：
+
+``` go
+package greetings
+
+import (
+    "testing"
+    "regexp"
+)
+
+// TestHelloName calls greetings.Hello with a name, checking
+// for a valid return value.
+func TestHelloName(t *testing.T) {
+    name := "Gladys"
+    want := regexp.MustCompile(`\b`+name+`\b`)
+    msg, err := Hello("Gladys")
+    if !want.MatchString(msg) || err != nil {
+        t.Errorf(`Hello("Gladys") = %q, %v, want match for %#q, nil`, msg, err, want)
+    }
+}
+
+// TestHelloEmpty calls greetings.Hello with an empty string,
+// checking for an error.
+func TestHelloEmpty(t *testing.T) {
+    msg, err := Hello("")
+    if msg != "" || err == nil {
+        t.Errorf(`Hello("") = %q, %v, want "", error`, msg, err)
+    }
+}
+```
+
+然后执行`go test`，可以发现执行成功，终端打印如下：
+
+``` shell
+PASS
+ok      example.com/greetings   0.521s
+```
 

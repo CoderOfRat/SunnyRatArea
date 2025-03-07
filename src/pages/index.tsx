@@ -22,9 +22,9 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">
+        <div className="hero__subtitle">
           <TypedTextComp />
-        </p>
+        </div>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
