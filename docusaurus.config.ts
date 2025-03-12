@@ -80,7 +80,7 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "introSidebar",
           position: "left",
-          label: "简介",
+          label: "Linux",
         },
         {
           type: "docSidebar",
