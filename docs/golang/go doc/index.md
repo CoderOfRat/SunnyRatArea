@@ -889,3 +889,141 @@ Go命令在`go.work`文件指定的hello目录中找到命令行中指定的`git
 接下来，我们将学习使用Gin框架开发几个Restful API
 
 ---
+### 6. 使用Go + Gin框架，实现Restful API
+> [gin web framework](https://gin-gonic.com/) -- Go语言最快的全功能Web框架。晶莹剔透。
+
+接下来，使用gin框架，完成订单新增、查询功能
+
+#### 6.1 设计API端点
+> ‌在计算机领域，Endpoints通常被称为“端点”或“终端点”。<br/>
+**定义和功能** <br/>
+Endpoints是网络或系统中的一个特定位置或节点，可以是网络通信的起点或终点。它们通过唯一的标识符（如URL、IP地址或其他协议标识）来区分和识别。Endpoints在数据传输和通信中起着关键作用，负责接收和发送数据，并通过不同的协议和通信方式与其他设备或系统进行交互。此外，Endpoints还用于实现访问控制和权限管理，确保系统的安全性‌。<br/>
+**应用场景**<br/>
+Endpoints广泛应用于各个领域和行业中，包括：<br/>
+- ‌网络通信‌：在网络设备和节点中，Endpoints负责接收、转发和发送数据包，实现网络通信功能‌。
+- ‌Web服务和API‌：Endpoints以特定的URL形式提供服务，开发者通过访问这些Endpoints来获取服务或执行操作‌。
+‌- 微服务架构‌：在微服务架构中，每个微服务都作为一个独立的Endpoint，提供特定的功能和服务‌。<br/>
+**具体实例**<br/>
+在Spring Boot框架中，Endpoints是应用程序提供的一种功能或服务，可以通过网络访问。Spring Boot提供了多种内置的Endpoints，如/health、/info、/metrics等，用于监控和管理应用程序的健康状况、性能指标和环境变量等信息。这些内置Endpoints可以通过配置文件进行自定义和扩展，开发人员还可以创建自定义Endpoints以提供更多的功能和服务‌。
+
+好的端点设计，更易于使用者理解，本次示例包含两个端点：
+
+1. /albums
+	- GET 获取 albums 列表信息，并以JSON格式响应
+	- POST 以请求的JSON入参，新增一个 albums
+
+2. /albums:id
+	- GET 获取指定id的 album，并响应返回该 album 的JSON
+
+#### 6.2 初始化项目
+
+``` shell
+mkdir web-service-gin
+
+cd web-service-gin
+
+go mod init github.com/coderofrat/web-service-gin
+```
+
+#### 6.3 创建数据结构
+
+在项目目录新建`main.go`文件，键入如下代码：
+``` go
+package main
+// 定义 album 结构，用于在内存存储 album 数据
+// album represents data about a record album.
+type album struct {
+    ID     string  `json:"id"`
+    Title  string  `json:"title"`
+    Artist string  `json:"artist"`
+    Price  float64 `json:"price"`
+}
+// 结构标记（例如 `json:"artist"`）指定在将结构的内容序列化为 JSON 时字段的名称应为什么。
+// 如果没有这些标记，JSON 将使用结构的大写字段名称 - 这种样式在 JSON 中并不常见。(因此这很必要)
+
+// albums slice to seed record album data.
+var albums = []album{
+    {ID: "1", Title: "Blue Train", Artist: "John Coltrane", Price: 56.99},
+    {ID: "2", Title: "Jeru", Artist: "Gerry Mulligan", Price: 17.99},
+    {ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
+}
+```
+#### 6.4 端点代码实现
+
+##### 6.4.1 编写一个处理程序（handler）来返回所有项目
+
+在此之前，我们可以访问gin官网，先下载gin：
+
+``` shell
+go get -u github.com/gin-gonic/gin
+```
+``` go 
+package main
+
+import (
+    "net/http"
+
+    "github.com/gin-gonic/gin"
+)
+
+// album represents data about a record album.
+type album struct {
+    ID     string  `json:"id"`
+    Title  string  `json:"title"`
+    Artist string  `json:"artist"`
+    Price  float64 `json:"price"`
+}
+
+// albums slice to seed record album data.
+var albums = []album{
+    {ID: "1", Title: "Blue Train", Artist: "John Coltrane", Price: 56.99},
+    {ID: "2", Title: "Jeru", Artist: "Gerry Mulligan", Price: 17.99},
+    {ID: "3", Title: "Sarah Vaughan and Clifford Brown", Artist: "Sarah Vaughan", Price: 39.99},
+}
+
+func main() {
+    router := gin.Default()
+    router.GET("/albums", getAlbums)
+    router.GET("/albums/:id", getAlbumByID)
+    router.POST("/albums", postAlbums)
+
+    router.Run("localhost:8080")
+}
+
+// getAlbums responds with the list of all albums as JSON.
+func getAlbums(c *gin.Context) {
+    c.IndentedJSON(http.StatusOK, albums)
+}
+
+// postAlbums adds an album from JSON received in the request body.
+func postAlbums(c *gin.Context) {
+    var newAlbum album
+
+    // Call BindJSON to bind the received JSON to
+    // newAlbum.
+    if err := c.BindJSON(&newAlbum); err != nil {
+        return
+    }
+
+    // Add the new album to the slice.
+    albums = append(albums, newAlbum)
+    c.IndentedJSON(http.StatusCreated, newAlbum)
+}
+
+// getAlbumByID locates the album whose ID value matches the id
+// parameter sent by the client, then returns that album as a response.
+func getAlbumByID(c *gin.Context) {
+    id := c.Param("id")
+
+    // Loop through the list of albums, looking for
+    // an album whose ID value matches the parameter.
+    for _, a := range albums {
+        if a.ID == id {
+            c.IndentedJSON(http.StatusOK, a)
+            return
+        }
+    }
+    c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+}
+
+```
