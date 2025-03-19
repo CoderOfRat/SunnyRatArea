@@ -1,10 +1,11 @@
-# GoLang Learning
+# GoLang 初见
+> **官方文档翻译与实践**
 ## Go编码前置知识
 > go以包的形式组织代码，一个包（package）代表一个文件夹下一系列源文件的集合，他们会被一起编译，被定义在同个包下的方法（functions）、类型（types）、变量（variables）、常量（constants）,在该工作区下是共享可见的。
 
 一个存储库，可以包含一个或者多个模块（modules）,一个模块是一系列一起发布的相关go包（packages）的集合。一个go存储库，通常只包含一个模块（module）,位于存储库的根目录。根目录下有个名为`go.mod`的文件声明了该模块的模块路径：模块内所有包的导入路径前缀。该模块包含其下级具有自己的`go.mod`文件的直属模块，不含直属模块下级包含`go.mod`文件的子目录。***（这个存疑，感觉文档写的英语有点绕，等后面在看到合适的解释，再修改）***
 
-go工作空间，允许你使用本地依赖，类似于Monorepo模式下的工作空间，本地依赖可以最为实际依赖进行引入。
+go工作空间，允许你使用本地依赖，类似于Monorepo模式下的工作空间，本地依赖可以作为实际依赖进行引入。
 
 go包的导入path：`go.mod`文件中的首行`module example.com/web-service-gin`，不仅声明了包的名字，也表示了该包的下载地址应为：	`https://example.com/web-service-gin`。
 
@@ -982,16 +983,27 @@ var albums = []album{
 }
 
 func main() {
+	// 使用 gin.Default() 进行 Gin 路由初始化
     router := gin.Default()
+	// 使用GET函数，建立一个关联， /albums 端点路径将使用 getAlbums 处理程序进行请求的处理。
+	// 请注意，我们传递的是 getAlbums 函数的名称。
+	// 这与传递函数结果不同，传递函数结果时，您需要传递 getAlbums()（请注意括号）。
+
     router.GET("/albums", getAlbums)
     router.GET("/albums/:id", getAlbumByID)
     router.POST("/albums", postAlbums)
-
+	// 使用 Run 函数将路由注册（附加）到 http.Server 并启动服务器。
     router.Run("localhost:8080")
 }
 
 // getAlbums responds with the list of all albums as JSON.
+// 此函数接收 gin.Context 参数，gin.Context 是Gin框架中至关重要的部分。
+// 它包含请求详细信息、验证和序列化 JSON 等。
+// （尽管名称相似，但这与 Go 的内置 context 包不同。）
 func getAlbums(c *gin.Context) {
+	// 调用 Context.IndentJSON 可以序列化 albums struct（结构体）为JSON，并添加到响应中。
+	// 该方法的第一个参数是 HTTP 状态码，用来表示发送至客户端的状态，net/http 包中的 http.StatusOK代表 200 状态码
+	// 我们也可以使用 Context.JSON 方法替代 Context.IndentJSON，以发送更紧凑的JSON。实际上，缩进形式在调试时更容易使用，并且响应的实际大小差异很小
     c.IndentedJSON(http.StatusOK, albums)
 }
 
@@ -1001,12 +1013,15 @@ func postAlbums(c *gin.Context) {
 
     // Call BindJSON to bind the received JSON to
     // newAlbum.
+	// 使用Context.BindJSON方法将请求体数据以JSON的形式绑定给 newAlbum 
     if err := c.BindJSON(&newAlbum); err != nil {
         return
     }
 
     // Add the new album to the slice.
+	// 将转化后的序列化JSON 附加到 albums 切片中
     albums = append(albums, newAlbum)
+	// 向客户端响应 201 状态码，并返回 成功附加的数据
     c.IndentedJSON(http.StatusCreated, newAlbum)
 }
 
