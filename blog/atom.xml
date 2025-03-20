@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://coderofrat.github.io/SunnyRatArea/blog</id>
-    <title>学 鼠 偷 粮 Blog</title>
+    <title>终极耗子 Blog</title>
     <updated>2023-09-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://coderofrat.github.io/SunnyRatArea/blog"/>
-    <subtitle>学 鼠 偷 粮 Blog</subtitle>
+    <subtitle>终极耗子 Blog</subtitle>
     <icon>https://coderofrat.github.io/SunnyRatArea/img/favicon.png</icon>
     <entry>
         <title type="html"><![CDATA[windows服务注册及卸载]]></title>

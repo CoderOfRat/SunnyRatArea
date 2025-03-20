@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>学 鼠 偷 粮 Blog</title>
+        <title>终极耗子 Blog</title>
         <link>https://coderofrat.github.io/SunnyRatArea/en/blog</link>
-        <description>学 鼠 偷 粮 Blog</description>
+        <description>终极耗子 Blog</description>
         <lastBuildDate>Wed, 27 Sep 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
