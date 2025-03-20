@@ -5,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: "学 鼠 偷 粮",
+  title: "终极耗子",
   tagline:
-    "岁月风霜三十载，百味人生唯己知；忆往昔，年少轻狂时，俱远矣；看今日，而立之年始，继拼之！",
+    "岁月风霜三十载，百味人生；忆往昔，年少轻狂时，俱远矣；看今日，而立之年后，继拼之！",
   favicon: "img/favicon.png",
 
   // Set the production url of your site here

@@ -1003,7 +1003,8 @@ func main() {
 func getAlbums(c *gin.Context) {
 	// 调用 Context.IndentJSON 可以序列化 albums struct（结构体）为JSON，并添加到响应中。
 	// 该方法的第一个参数是 HTTP 状态码，用来表示发送至客户端的状态，net/http 包中的 http.StatusOK代表 200 状态码
-	// 我们也可以使用 Context.JSON 方法替代 Context.IndentJSON，以发送更紧凑的JSON。实际上，缩进形式在调试时更容易使用，并且响应的实际大小差异很小
+	// 我们也可以使用 Context.JSON 方法替代 Context.IndentJSON，以发送更紧凑的JSON。
+	// 实际上，缩进形式在调试时更容易使用，并且响应的实际大小差异很小
     c.IndentedJSON(http.StatusOK, albums)
 }
 
@@ -1027,11 +1028,19 @@ func postAlbums(c *gin.Context) {
 
 // getAlbumByID locates the album whose ID value matches the id
 // parameter sent by the client, then returns that album as a response.
+// 通过入参 ID 查询指定 album 并响应到客户端
 func getAlbumByID(c *gin.Context) {
+	// 使用 Context.Param 从 URL 中检索 id 路径参数。
+	// 因此将此处理程序映射到路径时，要在路径中包含该参数的占位符 :id。
     id := c.Param("id")
 
     // Loop through the list of albums, looking for
     // an album whose ID value matches the parameter.
+	// 循环遍历切片中的 albums struct，查找 ID 字段值与 id 参数值匹配的专辑结构。
+	// 正式的应用中，一般为数据库查询
+	// 如果找到，则将该 album 结构序列化为 JSON，并将其作为带有 200 OK HTTP 的响应返回。
+	// 如果找不到匹配的 album，则使用 Context.IndentedJSON 返回 HTTP 404 错误
+
     for _, a := range albums {
         if a.ID == id {
             c.IndentedJSON(http.StatusOK, a)
@@ -1042,3 +1051,54 @@ func getAlbumByID(c *gin.Context) {
 }
 
 ```
+
+> 如果想要更规范地编码，可以参考 头部章节：Go编码前置知识 及 [Effective Go](https://golang.google.cn/doc/effective_go) 
+
+接下来，继续进行 Go 中的 泛型（generics）的学习
+
+### 7. 泛型入门
+
+本节介绍了 Go 中泛型的基础知识。借助泛型，可以声明和使用**能与调用代码提供的一组类型中的任何一个**一起使用的**函数或类型**。
+
+此示例是非泛型函数使用示例
+
+``` go
+pakage main
+
+// SumInts adds together the values of m.
+func SumInts(m map[string]int64) int64 {
+    var s int64
+    for _, v := range m {
+        s += v
+    }
+    return s
+}
+
+// SumFloats adds together the values of m.
+func SumFloats(m map[string]float64) float64 {
+    var s float64
+    for _, v := range m {
+        s += v
+    }
+    return s
+}
+```
+
+在本节中，我们使用泛型，添加一个通用函数，该函数可以接收包含整数或浮点值的Map，从而有效地用一个函数替换刚刚编写的两个函数。
+
+``` go
+// SumIntsOrFloats sums the values of map m. It supports both int64 and float64
+// as types for map values.
+// 其中[]包裹的参数，称为类型参数，括号内的为普通参数，类型参数指定了类型声明，
+// K 声明为 comparable, V 声明为 int64 或者 float64
+// 在普通参数的类型中，可以使用声明标识 K 和 V 代替 譬如 map[string]int64、mapp[string]float64
+func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
+    var s V
+    for _, v := range m {
+        s += v
+    }
+    return s
+}
+```
+
+
