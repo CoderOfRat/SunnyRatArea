@@ -1492,7 +1492,7 @@ func Reverse(s string) string {
 }
 ```
 
-这次，我们只想运行失败的测试来检查日志。为此，我们将使用 `go test -run`，要运行 FuzzXxx/testdata 中的特定语料库条目，您可以为 -run 提供 {FuzzTestName}/{filename}。这在调试时很有用。在这种情况下，将 -run 标志设置为失败测试的精确哈希值：
+这次，我们只想运行失败的测试来检查日志。为此，我们将使用 `go test -run`，要运行 FuzzXxx/testdata 中的特定语料库条目，您可以为 -run 提供 \{FuzzTestName\}/\{filename\}。这在调试时很有用。在这种情况下，将 -run 标志设置为失败测试的精确哈希值：
 
 ``` sh
 go test -run=FuzzReverse/5f644fdcef1c73a8                             
