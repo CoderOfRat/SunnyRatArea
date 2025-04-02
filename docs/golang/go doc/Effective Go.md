@@ -2507,9 +2507,9 @@ As we saw in the discussion of [interfaces](https://go-zh.org/doc/effective_go.h
 
 就像我们在前面 [接口](https://go-zh.org/doc/effective_go.html#interfaces_and_types) 中讨论的那样， 一个类型无需显式地声明它实现了某个接口。取而代之，该类型只要实现了某个接口的方法， 其实就实现了该接口。在实践中，大部分接口转换都是静态的，因此会在编译时检测。 例如，将一个 `*os.File` 传入一个接收 io.Reader 的函数将不会被编译， 除非 `*os.File` 实现了 io.Reader 接口。
 
-Some interface checks do happen at run-time, though. One instance is in the [encoding/json](https://go-zh.org/pkg/encoding/json/) package, which defines a [Marshaler](Marshaler) interface. When the JSON encoder receives a value that implements that interface, the encoder invokes the value's marshaling method to convert it to JSON instead of doing the standard conversion. The encoder checks this property at run time with a [type assertion](https://go-zh.org/doc/effective_go.html#interface_conversions) like:
+Some interface checks do happen at run-time, though. One instance is in the [encoding/json](https://go-zh.org/pkg/encoding/json/) package, which defines a [Marshaler](https://golang.google.cn/pkg/encoding/json/#Marshaler) interface. When the JSON encoder receives a value that implements that interface, the encoder invokes the value's marshaling method to convert it to JSON instead of doing the standard conversion. The encoder checks this property at run time with a [type assertion](https://go-zh.org/doc/effective_go.html#interface_conversions) like:
 
-尽管如此，有些接口检查会在运行时进行。例如，[encoding/json](https://go-zh.org/pkg/encoding/json/) 包定义了一个 [Marshaler](Marshaler) 接口。当 JSON 编码器接收到一个实现了该接口的值，那么该编码器就会调用该值的编组方法， 将其转换为 JSON，而非进行标准的类型转换。 编码器在运行时通过 [类型断言](https://go-zh.org/doc/effective_go.html#interface_conversions) 检查其属性，就像这样：
+尽管如此，有些接口检查会在运行时进行。例如，[encoding/json](https://go-zh.org/pkg/encoding/json/) 包定义了一个 [Marshaler](https://golang.google.cn/pkg/encoding/json/#Marshaler) 接口。当 JSON 编码器接收到一个实现了该接口的值，那么该编码器就会调用该值的编组方法， 将其转换为 JSON，而非进行标准的类型转换。 编码器在运行时通过 [类型断言](https://go-zh.org/doc/effective_go.html#interface_conversions) 检查其属性，就像这样：
 
 ```go
 m, ok := val.(json.Marshaler)
