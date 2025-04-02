@@ -359,7 +359,7 @@ go run .
 # Hi, CoderOfRat. Welcome!
 ```
 
-![go run .](../static/images/2025-02-27_142024.png)
+![go run .](./static/images/2025-02-27_142024.png)
 
 *至此，已经完成了两个可运行模块的编写/运行，接下来我们来给代码添加一些错误处理逻辑*
 
@@ -495,7 +495,7 @@ message, error := greetings.Hello("CoderOfrat")
 
 在hello目录，多次执行`go run .`，得到如下结果：
 
-![go run .](../static/images/2025-02-27_173558.png)
+![go run .](./static/images/2025-02-27_173558.png)
 
 由于打印是随机的，所以结果会有所不同。
 
@@ -725,11 +725,11 @@ go build
 
 执行后，可以在同级目录生成hello.exe可执行文件：
 
-![go run build](../static/images/2025-03-12_173839.png)
+![go run build](./static/images/2025-03-12_173839.png)
 
 然后在命令行继续键入`hello`或者`hello.exe`,即可看到程序输出：
 
-![hello](../static/images/2025-03-12_174326.png)
+![hello](./static/images/2025-03-12_174326.png)
 
 您已将应用程序编译为可执行文件，因此可以运行它。但目前要运行它，您的命令需要位于可执行文件的目录中，或者指定可执行文件的路径。接下来，我们可以执行`go install`对此go程序进行安装，以至于可以随处运行此程序。首先我们需要先找到 Go 安装路径，`go install` 命令将在此安装当前包。 可以通过运行 `go list` 命令来找到安装路径，如下例所示：
 
@@ -746,11 +746,11 @@ set PATH=%PATH%;C:\path\to\your\install\directory # win
 ```
 完成以上配置后，执行`go install`之后,即可在系统任意目录进行执行 `hello`命令，运行该程序。
 
-![环境变量](../static/images/2025-03-13_085335.png)
+![环境变量](./static/images/2025-03-13_085335.png)
 
-![shell output](../static/images/2025-03-13_085407.png)
+![shell output](./static/images/2025-03-13_085407.png)
 
-![bin exe](../static/images/2025-03-13_085836.png)
+![bin exe](./static/images/2025-03-13_085836.png)
 
 至此，已经完成了对go语言的基本了解，接下来，我们需要进一步了解实际开发过程中的常见问题。
 
